@@ -1,0 +1,22 @@
+&nuclear_param
+num_n = 2,
+num_p = 2,
+prep_number = 2,
+nuc_name = "He4"
+/
+&calc_param
+max_iter = 1000,
+imaginary_time_step = 1d-2,
+cou_eps = 2d-1
+eps = 1d-1,
+is_output = .true.,
+is_use_dd = .true.,
+is_use_B = .true.
+is_use_W = .true.
+not_divJ = .true.,
+is_TimeR = .true.,
+is_coulomb = .false.,
+Nr = 50,
+Nz = 50,
+num_plot = 0
+/
