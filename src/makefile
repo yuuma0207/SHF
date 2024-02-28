@@ -9,7 +9,6 @@ LDFLAGS = -llapack -lblas
 SRC_DIR = ./../src
 MOD_DIR = ./../mod
 OBJ_DIR = ./../obj
-ZUNDA_DIR = ./../zunda
 
 all: ${TARGET} move_mods move_objs
 
