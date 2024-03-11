@@ -1,0 +1,1264 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="SHF is the most widely used model for the description of nuclear structure. The SHF code imposes axial symmetry and solves the Skyrme Hartree-Fock equations for nuclear structure.">
+    <meta name="author" content="" >
+    <link rel="icon" href="../favicon.png">
+
+    <title>math_derivation &ndash; Axial Skyrme Hartree-Fock (SHF) Code using Fortran Free-Form.</title>
+
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/pygments.css" rel="stylesheet">
+    <link href="../css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/local.css" rel="stylesheet">
+      <link  href="../tipuesearch/tipuesearch.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+         <script src="../js/jquery-2.1.3.min.js"></script>
+         <script src="../js/svg-pan-zoom.min.js"></script>
+
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="../index.html">Axial Skyrme Hartree-Fock (SHF) Code using Fortran Free-Form. </a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="dropdown hidden-xs visible-sm visible-md hidden-lg">
+              <a href="#" class="dropdown-toggle"
+                 data-toggle="dropdown" role="button"
+                 aria-haspopup="true"
+                 aria-expanded="false">
+                 Contents <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+                    <li><a href="../lists/files.html">Source Files</a></li>
+                  <li><a href="../lists/modules.html">Modules</a></li>
+                  <li><a href="../lists/procedures.html">Procedures</a></li>
+                  <li><a href="../program/main.html">Program</a></li>
+              </ul>
+            </li>
+                <li class="visible-xs hidden-sm visible-lg">
+                  <a href="../lists/files.html">Source Files</a>
+                </li>
+              <li class="visible-xs hidden-sm visible-lg">
+                <a href="../lists/modules.html">Modules</a>
+              </li>
+              <li class="visible-xs hidden-sm visible-lg">
+                <a href="../lists/procedures.html">Procedures</a>
+              </li>
+              <li class="visible-xs hidden-sm visible-lg">
+                <a href="../program/main.html">Program</a>
+              </li>
+          </ul>
+            <form action="../search.html" class="navbar-form navbar-right" role="search">
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Search" name="q" id="tipue_search_input" autocomplete="off" required>
+              </div>
+              <!--
+                  <button type="submit" class="btn btn-default">Submit</button>
+                  -->
+            </form>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="container">
+  <div class="row">
+    <h1>math_derivation
+      <small>Module</small>
+      
+    </h1>
+      <div class="row" id="info-bar">
+    <div class="col-lg-12">
+      <div class="well well-sm">
+        <ul class="list-inline" style="margin-bottom:0px;display:inline">
+
+          <li id="statements"><i class="fa fa-list-ol"></i>
+            <a data-toggle="tooltip"
+               data-placement="bottom" data-html="true"
+               title="18.6% of total for modules and submodules.">238 statements</a>
+          </li>
+
+            <li id="source-file">
+              <i class="fa fa-code"></i>
+              <a href="../src/math_derivation.f90"> Source File</a>
+            </li>
+        </ul>
+        <ol class="breadcrumb in-well text-right">
+              <li><a href='../sourcefile/math_derivation.f90.html'>math_derivation.f90</a></li>
+          <li class="active">math_derivation</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+  <script>
+    $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+    })
+  </script>
+
+  </div>
+
+  <div class="row">
+    <div class="col-md-3 hidden-xs hidden-sm visible-md visible-lg">
+        <div id="sidebar">
+      <h3>Contents</h3>
+  
+      <div class="panel panel-primary">
+      <div class="panel-heading text-left">
+        <h3 class="panel-title">
+          <a data-toggle="collapse" href="#vars-0">Variables</a>
+        </h3>
+      </div>
+      <div id="vars-0" class="panel-collapse collapse">
+        <div class="list-group">
+            <a class="list-group-item" href="../module/math_derivation.html#variable-eps">eps</a>
+        </div>
+      </div>
+    </div>
+
+  
+  
+  
+  
+  
+  
+      <div class="panel panel-primary">
+      <div class="panel-heading text-left">
+        <h3 class="panel-title">
+          <a data-toggle="collapse" href="#inters-0">Interfaces</a>
+        </h3>
+      </div>
+      <div id="inters-0" class="panel-collapse collapse">
+        <div class="list-group">
+            <a class="list-group-item" href="../module/math_derivation.html#interface-math_diff_2r_9point">math_diff_2r_9point</a>
+            <a class="list-group-item" href="../module/math_derivation.html#interface-math_diff_2z_9point">math_diff_2z_9point</a>
+            <a class="list-group-item" href="../module/math_derivation.html#interface-math_diff_r_9point">math_diff_r_9point</a>
+            <a class="list-group-item" href="../module/math_derivation.html#interface-math_diff_z_9point">math_diff_z_9point</a>
+        </div>
+      </div>
+    </div>
+
+  
+  
+      <div class="panel panel-primary">
+      <div class="panel-heading text-left">
+        <h3 class="panel-title">
+          <a data-toggle="collapse" href="#funcs-0">Functions</a>
+        </h3>
+      </div>
+      <div id="funcs-0" class="panel-collapse collapse">
+        <div class="list-group">
+            <a class="list-group-item" href="../module/math_derivation.html#proc-math_diff_2r_9point_realfunc">math_diff_2r_9point_realfunc</a>
+            <a class="list-group-item" href="../module/math_derivation.html#proc-math_diff_2z_9point_realfunc">math_diff_2z_9point_realfunc</a>
+            <a class="list-group-item" href="../module/math_derivation.html#proc-math_diff_r_9point_complexfunc">math_diff_r_9point_complexfunc</a>
+            <a class="list-group-item" href="../module/math_derivation.html#proc-math_diff_r_9point_realfunc">math_diff_r_9point_realfunc</a>
+            <a class="list-group-item" href="../module/math_derivation.html#proc-math_diff_z_9point_complexfunc">math_diff_z_9point_complexfunc</a>
+            <a class="list-group-item" href="../module/math_derivation.html#proc-math_diff_z_9point_realfunc">math_diff_z_9point_realfunc</a>
+        </div>
+      </div>
+    </div>
+
+  
+  
+  
+  
+  
+  
+  
+
+
+  </div>
+
+    </div>
+
+    <div class="col-md-9" id='text'>
+      
+<br>          <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Uses</h3>
+      </div>
+      <ul class="list-group">
+          <li class="list-group-item">
+            <ul class="list-inline">
+                <li><a href='<a href="http://fortranwiki.org/fortran/show/iso_fortran_env">iso_fortran_env</a>'>iso_fortran_env</a></li>
+            </ul>
+          </li>
+          <li class="list-group-item">
+            <div class="depgraph"><?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.43.0 (0)
+ -->
+<!-- Title: module~~math_derivation~~UsesGraph Pages: 1 -->
+<svg id="modulemath_derivationUsesGraph" width="220pt" height="32pt"
+ viewBox="0.00 0.00 220.00 32.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="module~~math_derivation~~UsesGraph" class="graph" transform="scale(1 1) rotate(0) translate(4 28)">
+<title>module~~math_derivation~~UsesGraph</title>
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-28 216,-28 216,4 -4,4"/>
+<!-- module~math_derivation -->
+<g id="module~~math_derivation~~UsesGraph_node1" class="node">
+<title>module~math_derivation</title>
+<polygon fill="none" stroke="black" points="212,-24 123,-24 123,0 212,0 212,-24"/>
+<text text-anchor="middle" x="167.5" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50">math_derivation</text>
+</g>
+<!-- iso_fortran_env -->
+<g id="module~~math_derivation~~UsesGraph_node2" class="node">
+<title>iso_fortran_env</title>
+<polygon fill="#337ab7" stroke="#337ab7" points="87,-24 0,-24 0,0 87,0 87,-24"/>
+<text text-anchor="middle" x="43.5" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">iso_fortran_env</text>
+</g>
+<!-- module~math_derivation&#45;&gt;iso_fortran_env -->
+<g id="module~~math_derivation~~UsesGraph_edge1" class="edge">
+<title>module~math_derivation&#45;&gt;iso_fortran_env</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M122.8,-12C114.54,-12 105.81,-12 97.3,-12"/>
+<polygon fill="#000000" stroke="#000000" points="97.08,-8.5 87.08,-12 97.08,-15.5 97.08,-8.5"/>
+</g>
+</g>
+</svg>
+</div>        <div><a type="button" class="graph-help" data-toggle="modal" href="#graph-help-text">Help</a></div>
+          <div class="modal fade" id="graph-help-text" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                  <h4 class="modal-title" id="-graph-help-label">Graph Key</h4>
+                </div>
+              <div class="modal-body">
+<p>Nodes of different colours represent the following: </p>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.43.0 (0)
+ -->
+<!-- Title: Graph Key Pages: 1 -->
+<svg width="490pt" height="32pt"
+ viewBox="0.00 0.00 489.50 32.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 28)">
+<title>Graph Key</title>
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-28 485.5,-28 485.5,4 -4,4"/>
+<!-- Module -->
+<g id="node1" class="node">
+<title>Module</title>
+<polygon fill="#337ab7" stroke="#337ab7" points="54,-24 0,-24 0,0 54,0 54,-24"/>
+<text text-anchor="middle" x="27" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Module</text>
+</g>
+<!-- Submodule -->
+<g id="node2" class="node">
+<title>Submodule</title>
+<polygon fill="#5bc0de" stroke="#5bc0de" points="139.5,-24 72.5,-24 72.5,0 139.5,0 139.5,-24"/>
+<text text-anchor="middle" x="106" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Submodule</text>
+</g>
+<!-- Subroutine -->
+<g id="node3" class="node">
+<title>Subroutine</title>
+<polygon fill="#d9534f" stroke="#d9534f" points="222,-24 158,-24 158,0 222,0 222,-24"/>
+<text text-anchor="middle" x="190" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Subroutine</text>
+</g>
+<!-- Function -->
+<g id="node4" class="node">
+<title>Function</title>
+<polygon fill="#d94e8f" stroke="#d94e8f" points="294,-24 240,-24 240,0 294,0 294,-24"/>
+<text text-anchor="middle" x="267" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Function</text>
+</g>
+<!-- Program -->
+<g id="node5" class="node">
+<title>Program</title>
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="366,-24 312,-24 312,0 366,0 366,-24"/>
+<text text-anchor="middle" x="339" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Program</text>
+</g>
+<!-- This Page&#39;s Entity -->
+<g id="node6" class="node">
+<title>This Page&#39;s Entity</title>
+<polygon fill="none" stroke="black" points="481.5,-24 384.5,-24 384.5,0 481.5,0 481.5,-24"/>
+<text text-anchor="middle" x="433" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50">This Page&#39;s Entity</text>
+</g>
+</g>
+</svg>
+
+<p>Solid arrows point from a submodule to the (sub)module which it is
+descended from. Dashed arrows point from a module or program unit to 
+modules which it uses.
+</p>
+ </div>
+            </div>
+          </div>
+        </div>
+          </li>
+      </ul>
+    </div>
+
+          <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Used by</h3>
+      </div>
+      <ul class="list-group">
+          <li class="list-group-item">
+            <div class="depgraph"><?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.43.0 (0)
+ -->
+<!-- Title: module~~math_derivation~~UsedByGraph Pages: 1 -->
+<svg id="modulemath_derivationUsedByGraph" width="354pt" height="284pt"
+ viewBox="0.00 0.00 354.00 284.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="module~~math_derivation~~UsedByGraph" class="graph" transform="scale(1 1) rotate(0) translate(4 280)">
+<title>module~~math_derivation~~UsedByGraph</title>
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-280 350,-280 350,4 -4,4"/>
+<!-- module~math_derivation -->
+<g id="module~~math_derivation~~UsedByGraph_node1" class="node">
+<title>module~math_derivation</title>
+<polygon fill="none" stroke="black" points="89,-150 0,-150 0,-126 89,-126 89,-150"/>
+<text text-anchor="middle" x="44.5" y="-135.6" font-family="Helvetica,sans-Serif" font-size="10.50">math_derivation</text>
+</g>
+<!-- proc~calc_bpsi -->
+<g id="module~~math_derivation~~UsedByGraph_node2" class="node">
+<title>proc~calc_bpsi</title>
+<g id="a_module~~math_derivation~~UsedByGraph_node2"><a xlink:href=".././proc/calc_bpsi.html" xlink:title="main::calc_Bpsi">
+<polygon fill="#d9534f" stroke="#d9534f" points="279,-276 192,-276 192,-252 279,-252 279,-276"/>
+<text text-anchor="middle" x="235.5" y="-261.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">main::calc_Bpsi</text>
+</a>
+</g>
+</g>
+<!-- proc~calc_bpsi&#45;&gt;module~math_derivation -->
+<g id="module~~math_derivation~~UsedByGraph_edge1" class="edge">
+<title>proc~calc_bpsi&#45;&gt;module~math_derivation</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M191.86,-262.95C170.44,-260.73 144.89,-255.36 125,-243 92.23,-222.63 68.12,-183.49 55.49,-159.18"/>
+<polygon fill="#000000" stroke="#000000" points="58.53,-157.44 50.93,-150.06 52.27,-160.57 58.53,-157.44"/>
+</g>
+<!-- proc~calc_density_and_lap -->
+<g id="module~~math_derivation~~UsedByGraph_node3" class="node">
+<title>proc~calc_density_and_lap</title>
+<g id="a_module~~math_derivation~~UsedByGraph_node3"><a xlink:href=".././proc/calc_density_and_lap.html" xlink:title="main::calc_density_and_lap">
+<polygon fill="#d9534f" stroke="#d9534f" points="308,-234 163,-234 163,-210 308,-210 308,-234"/>
+<text text-anchor="middle" x="235.5" y="-219.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">main::calc_density_and_lap</text>
+</a>
+</g>
+</g>
+<!-- proc~calc_density_and_lap&#45;&gt;module~math_derivation -->
+<g id="module~~math_derivation~~UsedByGraph_edge2" class="edge">
+<title>proc~calc_density_and_lap&#45;&gt;module~math_derivation</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M162.85,-213.4C149.91,-210.42 136.79,-206.4 125,-201 101.69,-190.31 79.17,-171.4 64.09,-157.08"/>
+<polygon fill="#000000" stroke="#000000" points="66.52,-154.56 56.92,-150.07 61.63,-159.56 66.52,-154.56"/>
+</g>
+<!-- proc~calc_derivation_of_wavefunction -->
+<g id="module~~math_derivation~~UsedByGraph_node4" class="node">
+<title>proc~calc_derivation_of_wavefunction</title>
+<g id="a_module~~math_derivation~~UsedByGraph_node4"><a xlink:href=".././proc/calc_derivation_of_wavefunction.html" xlink:title="main::calc_derivation_of_wavefunction">
+<polygon fill="#d9534f" stroke="#d9534f" points="333.5,-192 137.5,-192 137.5,-168 333.5,-168 333.5,-192"/>
+<text text-anchor="middle" x="235.5" y="-177.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">main::calc_derivation_of_wavefunction</text>
+</a>
+</g>
+</g>
+<!-- proc~calc_derivation_of_wavefunction&#45;&gt;module~math_derivation -->
+<g id="module~~math_derivation~~UsedByGraph_edge3" class="edge">
+<title>proc~calc_derivation_of_wavefunction&#45;&gt;module~math_derivation</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M167.76,-167.96C153.6,-165.19 138.78,-162.14 125,-159 116.5,-157.07 107.54,-154.86 98.82,-152.62"/>
+<polygon fill="#000000" stroke="#000000" points="99.66,-149.23 89.1,-150.1 97.9,-156 99.66,-149.23"/>
+</g>
+<!-- proc~calc_hpsi2 -->
+<g id="module~~math_derivation~~UsedByGraph_node5" class="node">
+<title>proc~calc_hpsi2</title>
+<g id="a_module~~math_derivation~~UsedByGraph_node5"><a xlink:href=".././proc/calc_hpsi2.html" xlink:title="main::calc_Hpsi2">
+<polygon fill="#d9534f" stroke="#d9534f" points="282.5,-150 188.5,-150 188.5,-126 282.5,-126 282.5,-150"/>
+<text text-anchor="middle" x="235.5" y="-135.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">main::calc_Hpsi2</text>
+</a>
+</g>
+</g>
+<!-- proc~calc_hpsi2&#45;&gt;module~math_derivation -->
+<g id="module~~math_derivation~~UsedByGraph_edge4" class="edge">
+<title>proc~calc_hpsi2&#45;&gt;module~math_derivation</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M188.27,-138C161.4,-138 127.43,-138 99.36,-138"/>
+<polygon fill="#000000" stroke="#000000" points="99.31,-134.5 89.31,-138 99.31,-141.5 99.31,-134.5"/>
+</g>
+<!-- proc~calc_pot_w -->
+<g id="module~~math_derivation~~UsedByGraph_node6" class="node">
+<title>proc~calc_pot_w</title>
+<g id="a_module~~math_derivation~~UsedByGraph_node6"><a xlink:href=".././proc/calc_pot_w.html" xlink:title="determine_meanfield_potential::calc_pot_W">
+<polygon fill="#d9534f" stroke="#d9534f" points="346,-108 125,-108 125,-84 346,-84 346,-108"/>
+<text text-anchor="middle" x="235.5" y="-93.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">determine_meanfield_potential::calc_pot_W</text>
+</a>
+</g>
+</g>
+<!-- proc~calc_pot_w&#45;&gt;module~math_derivation -->
+<g id="module~~math_derivation~~UsedByGraph_edge5" class="edge">
+<title>proc~calc_pot_w&#45;&gt;module~math_derivation</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M167.76,-108.04C153.6,-110.81 138.78,-113.86 125,-117 116.5,-118.93 107.54,-121.14 98.82,-123.38"/>
+<polygon fill="#000000" stroke="#000000" points="97.9,-120 89.1,-125.9 99.66,-126.77 97.9,-120"/>
+</g>
+<!-- proc~calc_spin_orbit_density_and_div -->
+<g id="module~~math_derivation~~UsedByGraph_node7" class="node">
+<title>proc~calc_spin_orbit_density_and_div</title>
+<g id="a_module~~math_derivation~~UsedByGraph_node7"><a xlink:href=".././proc/calc_spin_orbit_density_and_div.html" xlink:title="main::calc_spin_orbit_density_and_div">
+<polygon fill="#d9534f" stroke="#d9534f" points="333.5,-66 137.5,-66 137.5,-42 333.5,-42 333.5,-66"/>
+<text text-anchor="middle" x="235.5" y="-51.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">main::calc_spin_orbit_density_and_div</text>
+</a>
+</g>
+</g>
+<!-- proc~calc_spin_orbit_density_and_div&#45;&gt;module~math_derivation -->
+<g id="module~~math_derivation~~UsedByGraph_edge6" class="edge">
+<title>proc~calc_spin_orbit_density_and_div&#45;&gt;module~math_derivation</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M149.52,-66.05C141.06,-68.5 132.74,-71.45 125,-75 101.69,-85.69 79.17,-104.6 64.09,-118.92"/>
+<polygon fill="#000000" stroke="#000000" points="61.63,-116.44 56.92,-125.93 66.52,-121.44 61.63,-116.44"/>
+</g>
+<!-- proc~copy_to_occupied_wf -->
+<g id="module~~math_derivation~~UsedByGraph_node8" class="node">
+<title>proc~copy_to_occupied_wf</title>
+<g id="a_module~~math_derivation~~UsedByGraph_node8"><a xlink:href=".././proc/copy_to_occupied_wf.html" xlink:title="main::copy_to_occupied_wf">
+<polygon fill="#d9534f" stroke="#d9534f" points="308,-24 163,-24 163,0 308,0 308,-24"/>
+<text text-anchor="middle" x="235.5" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">main::copy_to_occupied_wf</text>
+</a>
+</g>
+</g>
+<!-- proc~copy_to_occupied_wf&#45;&gt;module~math_derivation -->
+<g id="module~~math_derivation~~UsedByGraph_edge7" class="edge">
+<title>proc~copy_to_occupied_wf&#45;&gt;module~math_derivation</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M162.73,-17.96C149.53,-21.17 136.34,-25.95 125,-33 92.23,-53.37 68.12,-92.51 55.49,-116.82"/>
+<polygon fill="#000000" stroke="#000000" points="52.27,-115.43 50.93,-125.94 58.53,-118.56 52.27,-115.43"/>
+</g>
+</g>
+</svg>
+</div>        <div><a type="button" class="graph-help" data-toggle="modal" href="#graph-help-text">Help</a></div>
+          <div class="modal fade" id="graph-help-text" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                  <h4 class="modal-title" id="-graph-help-label">Graph Key</h4>
+                </div>
+              <div class="modal-body">
+<p>Nodes of different colours represent the following: </p>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.43.0 (0)
+ -->
+<!-- Title: Graph Key Pages: 1 -->
+<svg width="490pt" height="32pt"
+ viewBox="0.00 0.00 489.50 32.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 28)">
+<title>Graph Key</title>
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-28 485.5,-28 485.5,4 -4,4"/>
+<!-- Module -->
+<g id="node1" class="node">
+<title>Module</title>
+<polygon fill="#337ab7" stroke="#337ab7" points="54,-24 0,-24 0,0 54,0 54,-24"/>
+<text text-anchor="middle" x="27" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Module</text>
+</g>
+<!-- Submodule -->
+<g id="node2" class="node">
+<title>Submodule</title>
+<polygon fill="#5bc0de" stroke="#5bc0de" points="139.5,-24 72.5,-24 72.5,0 139.5,0 139.5,-24"/>
+<text text-anchor="middle" x="106" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Submodule</text>
+</g>
+<!-- Subroutine -->
+<g id="node3" class="node">
+<title>Subroutine</title>
+<polygon fill="#d9534f" stroke="#d9534f" points="222,-24 158,-24 158,0 222,0 222,-24"/>
+<text text-anchor="middle" x="190" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Subroutine</text>
+</g>
+<!-- Function -->
+<g id="node4" class="node">
+<title>Function</title>
+<polygon fill="#d94e8f" stroke="#d94e8f" points="294,-24 240,-24 240,0 294,0 294,-24"/>
+<text text-anchor="middle" x="267" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Function</text>
+</g>
+<!-- Program -->
+<g id="node5" class="node">
+<title>Program</title>
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="366,-24 312,-24 312,0 366,0 366,-24"/>
+<text text-anchor="middle" x="339" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Program</text>
+</g>
+<!-- This Page&#39;s Entity -->
+<g id="node6" class="node">
+<title>This Page&#39;s Entity</title>
+<polygon fill="none" stroke="black" points="481.5,-24 384.5,-24 384.5,0 481.5,0 481.5,-24"/>
+<text text-anchor="middle" x="433" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50">This Page&#39;s Entity</text>
+</g>
+</g>
+</svg>
+
+<p>Solid arrows point from a submodule to the (sub)module which it is
+descended from. Dashed arrows point from a module or program unit to 
+modules which it uses.
+</p>
+ </div>
+            </div>
+          </div>
+        </div>
+          </li>
+      </ul>
+    </div>
+
+      <br>
+
+      <section class="visible-xs visible-sm hidden-md">
+          <h3>Contents</h3>
+  
+      <div class="panel panel-primary">
+      <div class="panel-heading text-left">
+        <h3 class="panel-title">
+          <a data-toggle="collapse" href="#vars-1">Variables</a>
+        </h3>
+      </div>
+      <div id="vars-1" class="panel-collapse collapse">
+        <div class="list-group">
+            <a class="list-group-item" href="../module/math_derivation.html#variable-eps">eps</a>
+        </div>
+      </div>
+    </div>
+
+  
+  
+  
+  
+  
+  
+      <div class="panel panel-primary">
+      <div class="panel-heading text-left">
+        <h3 class="panel-title">
+          <a data-toggle="collapse" href="#inters-1">Interfaces</a>
+        </h3>
+      </div>
+      <div id="inters-1" class="panel-collapse collapse">
+        <div class="list-group">
+            <a class="list-group-item" href="../module/math_derivation.html#interface-math_diff_2r_9point">math_diff_2r_9point</a>
+            <a class="list-group-item" href="../module/math_derivation.html#interface-math_diff_2z_9point">math_diff_2z_9point</a>
+            <a class="list-group-item" href="../module/math_derivation.html#interface-math_diff_r_9point">math_diff_r_9point</a>
+            <a class="list-group-item" href="../module/math_derivation.html#interface-math_diff_z_9point">math_diff_z_9point</a>
+        </div>
+      </div>
+    </div>
+
+  
+  
+      <div class="panel panel-primary">
+      <div class="panel-heading text-left">
+        <h3 class="panel-title">
+          <a data-toggle="collapse" href="#funcs-1">Functions</a>
+        </h3>
+      </div>
+      <div id="funcs-1" class="panel-collapse collapse">
+        <div class="list-group">
+            <a class="list-group-item" href="../module/math_derivation.html#proc-math_diff_2r_9point_realfunc">math_diff_2r_9point_realfunc</a>
+            <a class="list-group-item" href="../module/math_derivation.html#proc-math_diff_2z_9point_realfunc">math_diff_2z_9point_realfunc</a>
+            <a class="list-group-item" href="../module/math_derivation.html#proc-math_diff_r_9point_complexfunc">math_diff_r_9point_complexfunc</a>
+            <a class="list-group-item" href="../module/math_derivation.html#proc-math_diff_r_9point_realfunc">math_diff_r_9point_realfunc</a>
+            <a class="list-group-item" href="../module/math_derivation.html#proc-math_diff_z_9point_complexfunc">math_diff_z_9point_complexfunc</a>
+            <a class="list-group-item" href="../module/math_derivation.html#proc-math_diff_z_9point_realfunc">math_diff_z_9point_realfunc</a>
+        </div>
+      </div>
+    </div>
+
+  
+  
+  
+  
+  
+  
+  
+
+
+      </section>
+      <br class="visible-xs visible-sm hidden-md">
+
+
+        <section>
+          <h2>Variables</h2>
+            <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th>Type</th>
+<th>Visibility</th>        <th>Attributes</th>
+        <th></th>
+        <th>Name</th>
+<th></th><th>Initial</th>        <th></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-eps"></span>
+              real(kind=real64),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>eps</strong></td>
+<td> =</td>
+                <td>0.03d0</td>
+            <td>
+                
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+        </section>
+        <br>
+
+
+        <section>
+          <h2>Interfaces</h2>
+              <div class="panel panel-default">
+    <div class="panel-heading codesum">
+      <span class="anchor" id="interface-math_diff_2r_9point"></span>
+      <h3>public        interface <a href='../interface/math_diff_2r_9point.html'>math_diff_2r_9point</a> 
+      </h3>
+    </div>
+    <ul class="list-group">
+          <li class="list-group-item">
+                <h3>
+    public  function <a href='../proc/math_diff_2r_9point_realfunc.html'>math_diff_2r_9point_realfunc</a>(f) result(f_2r)  
+
+    </h3>
+    
+  
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th>Type</th>
+<th>Intent</th><th>Optional</th>        <th>Attributes</th>
+        <th></th>
+        <th>Name</th>
+        <th></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=real64),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>f</strong>(:,:)</td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+    <h4>
+    Return Value
+    <small>real(kind=real64), allocatable, (:,:)</small>
+    </h4>
+    
+
+          </li>
+    </ul>
+  </div>
+
+              <div class="panel panel-default">
+    <div class="panel-heading codesum">
+      <span class="anchor" id="interface-math_diff_2z_9point"></span>
+      <h3>public        interface <a href='../interface/math_diff_2z_9point.html'>math_diff_2z_9point</a> 
+      </h3>
+    </div>
+    <ul class="list-group">
+          <li class="list-group-item">
+                <h3>
+    public  function <a href='../proc/math_diff_2z_9point_realfunc.html'>math_diff_2z_9point_realfunc</a>(f) result(f_2z)  
+
+    </h3>
+    
+  
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th>Type</th>
+<th>Intent</th><th>Optional</th>        <th>Attributes</th>
+        <th></th>
+        <th>Name</th>
+        <th></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=real64),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>f</strong>(:,:)</td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+    <h4>
+    Return Value
+    <small>real(kind=real64), allocatable, (:,:)</small>
+    </h4>
+    
+
+          </li>
+    </ul>
+  </div>
+
+              <div class="panel panel-default">
+    <div class="panel-heading codesum">
+      <span class="anchor" id="interface-math_diff_r_9point"></span>
+      <h3>public        interface <a href='../interface/math_diff_r_9point.html'>math_diff_r_9point</a> 
+      </h3>
+    </div>
+    <ul class="list-group">
+          <li class="list-group-item">
+                <h3>
+    public  function <a href='../proc/math_diff_r_9point_realfunc.html'>math_diff_r_9point_realfunc</a>(f) result(f_r)  
+
+    </h3>
+    
+  
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th>Type</th>
+<th>Intent</th><th>Optional</th>        <th>Attributes</th>
+        <th></th>
+        <th>Name</th>
+        <th></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=real64),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>f</strong>(:,:)</td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+    <h4>
+    Return Value
+    <small>real(kind=real64), allocatable, (:,:)</small>
+    </h4>
+    
+
+          </li>
+          <li class="list-group-item">
+                <h3>
+    public  function <a href='../proc/math_diff_r_9point_complexfunc.html'>math_diff_r_9point_complexfunc</a>(f) result(f_r)  
+
+    </h3>
+    
+  
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th>Type</th>
+<th>Intent</th><th>Optional</th>        <th>Attributes</th>
+        <th></th>
+        <th>Name</th>
+        <th></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              complex(kind=real64),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>f</strong>(:,:)</td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+    <h4>
+    Return Value
+    <small>complex(kind=real64), allocatable, (:,:)</small>
+    </h4>
+    
+
+          </li>
+    </ul>
+  </div>
+
+              <div class="panel panel-default">
+    <div class="panel-heading codesum">
+      <span class="anchor" id="interface-math_diff_z_9point"></span>
+      <h3>public        interface <a href='../interface/math_diff_z_9point.html'>math_diff_z_9point</a> 
+      </h3>
+    </div>
+    <ul class="list-group">
+          <li class="list-group-item">
+                <h3>
+    public  function <a href='../proc/math_diff_z_9point_realfunc.html'>math_diff_z_9point_realfunc</a>(f) result(f_z)  
+
+    </h3>
+    
+  
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th>Type</th>
+<th>Intent</th><th>Optional</th>        <th>Attributes</th>
+        <th></th>
+        <th>Name</th>
+        <th></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=real64),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>f</strong>(:,:)</td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+    <h4>
+    Return Value
+    <small>real(kind=real64), allocatable, (:,:)</small>
+    </h4>
+    
+
+          </li>
+          <li class="list-group-item">
+                <h3>
+    public  function <a href='../proc/math_diff_z_9point_complexfunc.html'>math_diff_z_9point_complexfunc</a>(f) result(f_z)  
+
+    </h3>
+    
+  
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th>Type</th>
+<th>Intent</th><th>Optional</th>        <th>Attributes</th>
+        <th></th>
+        <th>Name</th>
+        <th></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              complex(kind=real64),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>f</strong>(:,:)</td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+    <h4>
+    Return Value
+    <small>complex(kind=real64), allocatable, (:,:)</small>
+    </h4>
+    
+
+          </li>
+    </ul>
+  </div>
+
+        </section>
+        <br>
+
+
+
+        <section>
+          <h2>Functions</h2>
+              <div class="panel panel-default">
+    <div class="panel-heading codesum"><span class="anchor" id="proc-math_diff_2r_9point_realfunc"></span><h3>public  function <a href='../proc/math_diff_2r_9point_realfunc.html'>math_diff_2r_9point_realfunc</a>(f) result(f_2r)  
+</h3></div>
+    <div class="panel-body">
+          
+  
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th>Type</th>
+<th>Intent</th><th>Optional</th>        <th>Attributes</th>
+        <th></th>
+        <th>Name</th>
+        <th></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=real64),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>f</strong>(:,:)</td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+    <h4>
+    Return Value
+    <small>real(kind=real64), allocatable, (:,:)</small>
+    </h4>
+    
+
+    </div>
+  </div>
+
+              <div class="panel panel-default">
+    <div class="panel-heading codesum"><span class="anchor" id="proc-math_diff_2z_9point_realfunc"></span><h3>public  function <a href='../proc/math_diff_2z_9point_realfunc.html'>math_diff_2z_9point_realfunc</a>(f) result(f_2z)  
+</h3></div>
+    <div class="panel-body">
+          
+  
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th>Type</th>
+<th>Intent</th><th>Optional</th>        <th>Attributes</th>
+        <th></th>
+        <th>Name</th>
+        <th></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=real64),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>f</strong>(:,:)</td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+    <h4>
+    Return Value
+    <small>real(kind=real64), allocatable, (:,:)</small>
+    </h4>
+    
+
+    </div>
+  </div>
+
+              <div class="panel panel-default">
+    <div class="panel-heading codesum"><span class="anchor" id="proc-math_diff_r_9point_complexfunc"></span><h3>public  function <a href='../proc/math_diff_r_9point_complexfunc.html'>math_diff_r_9point_complexfunc</a>(f) result(f_r)  
+</h3></div>
+    <div class="panel-body">
+          
+  
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th>Type</th>
+<th>Intent</th><th>Optional</th>        <th>Attributes</th>
+        <th></th>
+        <th>Name</th>
+        <th></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              complex(kind=real64),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>f</strong>(:,:)</td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+    <h4>
+    Return Value
+    <small>complex(kind=real64), allocatable, (:,:)</small>
+    </h4>
+    
+
+    </div>
+  </div>
+
+              <div class="panel panel-default">
+    <div class="panel-heading codesum"><span class="anchor" id="proc-math_diff_r_9point_realfunc"></span><h3>public  function <a href='../proc/math_diff_r_9point_realfunc.html'>math_diff_r_9point_realfunc</a>(f) result(f_r)  
+</h3></div>
+    <div class="panel-body">
+          
+  
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th>Type</th>
+<th>Intent</th><th>Optional</th>        <th>Attributes</th>
+        <th></th>
+        <th>Name</th>
+        <th></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=real64),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>f</strong>(:,:)</td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+    <h4>
+    Return Value
+    <small>real(kind=real64), allocatable, (:,:)</small>
+    </h4>
+    
+
+    </div>
+  </div>
+
+              <div class="panel panel-default">
+    <div class="panel-heading codesum"><span class="anchor" id="proc-math_diff_z_9point_complexfunc"></span><h3>public  function <a href='../proc/math_diff_z_9point_complexfunc.html'>math_diff_z_9point_complexfunc</a>(f) result(f_z)  
+</h3></div>
+    <div class="panel-body">
+          
+  
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th>Type</th>
+<th>Intent</th><th>Optional</th>        <th>Attributes</th>
+        <th></th>
+        <th>Name</th>
+        <th></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              complex(kind=real64),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>f</strong>(:,:)</td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+    <h4>
+    Return Value
+    <small>complex(kind=real64), allocatable, (:,:)</small>
+    </h4>
+    
+
+    </div>
+  </div>
+
+              <div class="panel panel-default">
+    <div class="panel-heading codesum"><span class="anchor" id="proc-math_diff_z_9point_realfunc"></span><h3>public  function <a href='../proc/math_diff_z_9point_realfunc.html'>math_diff_z_9point_realfunc</a>(f) result(f_z)  
+</h3></div>
+    <div class="panel-body">
+          
+  
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th>Type</th>
+<th>Intent</th><th>Optional</th>        <th>Attributes</th>
+        <th></th>
+        <th>Name</th>
+        <th></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=real64),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>f</strong>(:,:)</td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+    <h4>
+    Return Value
+    <small>real(kind=real64), allocatable, (:,:)</small>
+    </h4>
+    
+
+    </div>
+  </div>
+
+        </section>
+        <br>
+
+
+
+
+    </div>
+  </div>
+
+      <hr>
+    </div> <!-- /container -->
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-6 col-md-6"><p>Axial Skyrme Hartree-Fock (SHF) Code using Fortran Free-Form. was developed by <br>&copy; 2024 
+</p>
+          </div>
+          <div class="col-xs-6 col-md-6">
+            <p class="text-right">
+              Documentation generated by
+              <a href="https://github.com/Fortran-FOSS-Programmers/ford">FORD</a>
+            </p>
+          </div>
+        </div>
+        <br>
+      </div> <!-- /container -->
+    </footer>
+
+    <!-- Bootstrap core JavaScript
+         ================================================== -->
+         <!-- Placed at the end of the document so the pages load faster -->
+    <!--
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        -->
+        <script src="../js/bootstrap.min.js"></script>
+        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+        <script src="../js/ie10-viewport-bug-workaround.js"></script>
+
+        <!-- MathJax JavaScript
+             ================================================== -->
+             <!-- Placed at the end of the document so the pages load faster -->
+        <script type="text/x-mathjax-config">
+          MathJax.Hub.Config({
+          TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } },
+          jax: ['input/TeX','input/MathML','output/HTML-CSS'],
+          extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']
+          });
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+          <script src="../tipuesearch/tipuesearch_content.js"></script>
+          <script src="../tipuesearch/tipuesearch_set.js"></script>
+          <script src="../tipuesearch/tipuesearch.js"></script>
+
+  </body>
+</html>

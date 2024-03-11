@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="SHF is the most widely used model for the description of nuclear structure. The SHF code imposes axial symmetry and solves the Skyrme Hartree-Fock equations for nuclear structure.">
+    <meta name="author" content="" >
+    <link rel="icon" href="../favicon.png">
+
+    <title>calc_pot_U_np &ndash; Axial Skyrme Hartree-Fock (SHF) Code using Fortran Free-Form.</title>
+
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/pygments.css" rel="stylesheet">
+    <link href="../css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/local.css" rel="stylesheet">
+      <link  href="../tipuesearch/tipuesearch.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+         <script src="../js/jquery-2.1.3.min.js"></script>
+         <script src="../js/svg-pan-zoom.min.js"></script>
+
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="../index.html">Axial Skyrme Hartree-Fock (SHF) Code using Fortran Free-Form. </a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="dropdown hidden-xs visible-sm visible-md hidden-lg">
+              <a href="#" class="dropdown-toggle"
+                 data-toggle="dropdown" role="button"
+                 aria-haspopup="true"
+                 aria-expanded="false">
+                 Contents <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+                    <li><a href="../lists/files.html">Source Files</a></li>
+                  <li><a href="../lists/modules.html">Modules</a></li>
+                  <li><a href="../lists/procedures.html">Procedures</a></li>
+                  <li><a href="../program/main.html">Program</a></li>
+              </ul>
+            </li>
+                <li class="visible-xs hidden-sm visible-lg">
+                  <a href="../lists/files.html">Source Files</a>
+                </li>
+              <li class="visible-xs hidden-sm visible-lg">
+                <a href="../lists/modules.html">Modules</a>
+              </li>
+              <li class="visible-xs hidden-sm visible-lg">
+                <a href="../lists/procedures.html">Procedures</a>
+              </li>
+              <li class="visible-xs hidden-sm visible-lg">
+                <a href="../program/main.html">Program</a>
+              </li>
+          </ul>
+            <form action="../search.html" class="navbar-form navbar-right" role="search">
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Search" name="q" id="tipue_search_input" autocomplete="off" required>
+              </div>
+              <!--
+                  <button type="submit" class="btn btn-default">Submit</button>
+                  -->
+            </form>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="container">
+  <div class="row">
+    <h1>calc_pot_U_np
+      <small>Subroutine</small>
+      
+    </h1>
+      <div class="row" id="info-bar">
+    <div class="col-lg-12">
+      <div class="well well-sm">
+        <ul class="list-inline" style="margin-bottom:0px;display:inline">
+
+          <li id="statements"><i class="fa fa-list-ol"></i>
+            <a data-toggle="tooltip"
+               data-placement="bottom" data-html="true"
+               title=" 4.8% of total for procedures.">101 statements</a>
+          </li>
+
+            <li id="source-file">
+              <i class="fa fa-code"></i>
+              <a href="../src/determine_meanfield_potential.f90"> Source File</a>
+            </li>
+        </ul>
+        <ol class="breadcrumb in-well text-right">
+              <li><a href='../sourcefile/determine_meanfield_potential.f90.html'>determine_meanfield_potential.f90</a></li>
+              <li><a href='../module/determine_meanfield_potential.html'>determine_meanfield_potential</a></li>
+          <li class="active">calc_pot_U_np</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+  <script>
+    $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+    })
+  </script>
+
+  </div>
+  
+  <div class="row">
+    <div class="col-md-3 hidden-xs hidden-sm visible-md visible-lg">
+      <div id="sidebar">
+      <h3>Contents</h3>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+  </div>
+
+    </div>
+    
+    <div class="col-md-9" id='text'>
+    <h2>public  subroutine calc_pot_U_np(np_str, is_coulomb)  
+</h2>
+        <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Uses</h3>
+      </div>
+      <ul class="list-group">
+          <li class="list-group-item">
+            <ul class="list-inline">
+                <li><a href='../module/write_to_file.html'>write_to_file</a></li>
+                <li><a href='../module/global_variables.html'>global_variables</a></li>
+                <li><a href='<a href="http://fortranwiki.org/fortran/show/iso_fortran_env">iso_fortran_env</a>'>iso_fortran_env</a></li>
+                <li><a href='../module/constants_and_parameters.html'>constants_and_parameters</a></li>
+            </ul>
+          </li>
+          <li class="list-group-item">
+            <div class="depgraph"><?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.43.0 (0)
+ -->
+<!-- Title: proc~~calc_pot_u_np~~UsesGraph Pages: 1 -->
+<svg id="proccalc_pot_u_npUsesGraph" width="641pt" height="139pt"
+ viewBox="0.00 0.00 641.00 138.83" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="proc~~calc_pot_u_np~~UsesGraph" class="graph" transform="scale(1.05 1.05) rotate(0) translate(4 141.76)">
+<title>proc~~calc_pot_u_np~~UsesGraph</title>
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-141.76 669,-141.76 669,4 -4,4"/>
+<!-- proc~calc_pot_u_np -->
+<g id="proc~~calc_pot_u_np~~UsesGraph_node1" class="node">
+<title>proc~calc_pot_u_np</title>
+<polygon fill="none" stroke="black" points="665,-84 428,-84 428,-60 665,-60 665,-84"/>
+<text text-anchor="middle" x="546.5" y="-69.6" font-family="Helvetica,sans-Serif" font-size="10.50">determine_meanfield_potential::calc_pot_U_np</text>
+</g>
+<!-- iso_fortran_env -->
+<g id="proc~~calc_pot_u_np~~UsesGraph_node2" class="node">
+<title>iso_fortran_env</title>
+<polygon fill="#337ab7" stroke="#337ab7" points="87,-64 0,-64 0,-40 87,-40 87,-64"/>
+<text text-anchor="middle" x="43.5" y="-49.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">iso_fortran_env</text>
+</g>
+<!-- proc~calc_pot_u_np&#45;&gt;iso_fortran_env -->
+<g id="proc~~calc_pot_u_np~~UsesGraph_edge1" class="edge">
+<title>proc~calc_pot_u_np&#45;&gt;iso_fortran_env</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M515.97,-84.05C455.68,-107.12 314.11,-153.39 195.5,-132"/>
+</g>
+<!-- module~constants_and_parameters -->
+<g id="proc~~calc_pot_u_np~~UsesGraph_node3" class="node">
+<title>module~constants_and_parameters</title>
+<g id="a_proc~~calc_pot_u_np~~UsesGraph_node3"><a xlink:href=".././module/constants_and_parameters.html" xlink:title="constants_and_parameters">
+<polygon fill="#337ab7" stroke="#337ab7" points="266,-64 123,-64 123,-40 266,-40 266,-64"/>
+<text text-anchor="middle" x="194.5" y="-49.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">constants_and_parameters</text>
+</a>
+</g>
+</g>
+<!-- proc~calc_pot_u_np&#45;&gt;module~constants_and_parameters -->
+<g id="proc~~calc_pot_u_np~~UsesGraph_edge2" class="edge">
+<title>proc~calc_pot_u_np&#45;&gt;module~constants_and_parameters</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M427.98,-65.28C378.04,-62.43 321.07,-59.18 276.03,-56.6"/>
+<polygon fill="#000000" stroke="#000000" points="276.2,-53.11 266.02,-56.03 275.8,-60.09 276.2,-53.11"/>
+</g>
+<!-- module~global_variables -->
+<g id="proc~~calc_pot_u_np~~UsesGraph_node4" class="node">
+<title>module~global_variables</title>
+<g id="a_proc~~calc_pot_u_np~~UsesGraph_node4"><a xlink:href=".././module/global_variables.html" xlink:title="global_variables">
+<polygon fill="#337ab7" stroke="#337ab7" points="392,-104 302,-104 302,-80 392,-80 392,-104"/>
+<text text-anchor="middle" x="347" y="-89.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">global_variables</text>
+</a>
+</g>
+</g>
+<!-- proc~calc_pot_u_np&#45;&gt;module~global_variables -->
+<g id="proc~~calc_pot_u_np~~UsesGraph_edge3" class="edge">
+<title>proc~calc_pot_u_np&#45;&gt;module~global_variables</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M427.76,-83.92C418.93,-84.82 410.31,-85.69 402.2,-86.51"/>
+<polygon fill="#000000" stroke="#000000" points="401.82,-83.03 392.22,-87.52 402.52,-90 401.82,-83.03"/>
+</g>
+<!-- module~write_to_file -->
+<g id="proc~~calc_pot_u_np~~UsesGraph_node5" class="node">
+<title>module~write_to_file</title>
+<g id="a_proc~~calc_pot_u_np~~UsesGraph_node5"><a xlink:href=".././module/write_to_file.html" xlink:title="write_to_file">
+<polygon fill="#337ab7" stroke="#337ab7" points="382,-24 312,-24 312,0 382,0 382,-24"/>
+<text text-anchor="middle" x="347" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">write_to_file</text>
+</a>
+</g>
+</g>
+<!-- proc~calc_pot_u_np&#45;&gt;module~write_to_file -->
+<g id="proc~~calc_pot_u_np~~UsesGraph_edge4" class="edge">
+<title>proc~calc_pot_u_np&#45;&gt;module~write_to_file</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M505.53,-59.86C472.6,-49.85 425.96,-35.68 391.98,-25.36"/>
+<polygon fill="#000000" stroke="#000000" points="392.89,-21.98 382.31,-22.42 390.86,-28.68 392.89,-21.98"/>
+</g>
+<!-- module~constants_and_parameters&#45;&gt;iso_fortran_env -->
+<g id="proc~~calc_pot_u_np~~UsesGraph_edge5" class="edge">
+<title>module~constants_and_parameters&#45;&gt;iso_fortran_env</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M122.93,-52C114.36,-52 105.72,-52 97.47,-52"/>
+<polygon fill="#000000" stroke="#000000" points="97.26,-48.5 87.26,-52 97.26,-55.5 97.26,-48.5"/>
+</g>
+<!-- module~global_variables&#45;&gt;iso_fortran_env -->
+<g id="proc~~calc_pot_u_np~~UsesGraph_edge6" class="edge">
+<title>module~global_variables&#45;&gt;iso_fortran_env</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M324.32,-104C295.29,-118.62 242.06,-140.4 195.5,-132"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M193.5,-132C144.74,-123.21 95.53,-91.25 67.64,-70.48"/>
+<polygon fill="#000000" stroke="#000000" points="69.44,-67.45 59.36,-64.18 65.2,-73.02 69.44,-67.45"/>
+</g>
+<!-- module~global_variables&#45;&gt;module~constants_and_parameters -->
+<g id="proc~~calc_pot_u_np~~UsesGraph_edge7" class="edge">
+<title>module~global_variables&#45;&gt;module~constants_and_parameters</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M301.66,-80.22C285.64,-75.96 267.36,-71.1 250.54,-66.63"/>
+<polygon fill="#000000" stroke="#000000" points="251.39,-63.23 240.83,-64.05 249.59,-70 251.39,-63.23"/>
+</g>
+<!-- module~write_to_file&#45;&gt;iso_fortran_env -->
+<g id="proc~~calc_pot_u_np~~UsesGraph_edge8" class="edge">
+<title>module~write_to_file&#45;&gt;iso_fortran_env</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M311.76,-13.04C267.78,-14.81 189.21,-19.42 123,-31 113.51,-32.66 103.5,-34.93 93.92,-37.36"/>
+<polygon fill="#000000" stroke="#000000" points="92.91,-34.01 84.13,-39.94 94.69,-40.78 92.91,-34.01"/>
+</g>
+<!-- module~write_to_file&#45;&gt;module~constants_and_parameters -->
+<g id="proc~~calc_pot_u_np~~UsesGraph_edge9" class="edge">
+<title>module~write_to_file&#45;&gt;module~constants_and_parameters</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M311.85,-21.08C293.74,-25.89 271.05,-31.92 250.52,-37.38"/>
+<polygon fill="#000000" stroke="#000000" points="249.42,-34.05 240.65,-40 251.21,-40.81 249.42,-34.05"/>
+</g>
+</g>
+</svg>
+</div>                <script>
+                  var panproccalc_pot_u_npUsesGraph = svgPanZoom('#proccalc_pot_u_npUsesGraph',
+                    {zoomEnabled: true, controlIconsEnabled: true, fit: true, center: true,}
+                  );
+                </script>        <div><a type="button" class="graph-help" data-toggle="modal" href="#graph-help-text">Help</a></div>
+          <div class="modal fade" id="graph-help-text" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                  <h4 class="modal-title" id="-graph-help-label">Graph Key</h4>
+                </div>
+              <div class="modal-body">
+<p>Nodes of different colours represent the following: </p>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.43.0 (0)
+ -->
+<!-- Title: Graph Key Pages: 1 -->
+<svg width="490pt" height="32pt"
+ viewBox="0.00 0.00 489.50 32.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 28)">
+<title>Graph Key</title>
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-28 485.5,-28 485.5,4 -4,4"/>
+<!-- Module -->
+<g id="node1" class="node">
+<title>Module</title>
+<polygon fill="#337ab7" stroke="#337ab7" points="54,-24 0,-24 0,0 54,0 54,-24"/>
+<text text-anchor="middle" x="27" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Module</text>
+</g>
+<!-- Submodule -->
+<g id="node2" class="node">
+<title>Submodule</title>
+<polygon fill="#5bc0de" stroke="#5bc0de" points="139.5,-24 72.5,-24 72.5,0 139.5,0 139.5,-24"/>
+<text text-anchor="middle" x="106" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Submodule</text>
+</g>
+<!-- Subroutine -->
+<g id="node3" class="node">
+<title>Subroutine</title>
+<polygon fill="#d9534f" stroke="#d9534f" points="222,-24 158,-24 158,0 222,0 222,-24"/>
+<text text-anchor="middle" x="190" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Subroutine</text>
+</g>
+<!-- Function -->
+<g id="node4" class="node">
+<title>Function</title>
+<polygon fill="#d94e8f" stroke="#d94e8f" points="294,-24 240,-24 240,0 294,0 294,-24"/>
+<text text-anchor="middle" x="267" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Function</text>
+</g>
+<!-- Program -->
+<g id="node5" class="node">
+<title>Program</title>
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="366,-24 312,-24 312,0 366,0 366,-24"/>
+<text text-anchor="middle" x="339" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Program</text>
+</g>
+<!-- This Page&#39;s Entity -->
+<g id="node6" class="node">
+<title>This Page&#39;s Entity</title>
+<polygon fill="none" stroke="black" points="481.5,-24 384.5,-24 384.5,0 481.5,0 481.5,-24"/>
+<text text-anchor="middle" x="433" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50">This Page&#39;s Entity</text>
+</g>
+</g>
+</svg>
+
+<p>Solid arrows point from a submodule to the (sub)module which it is
+descended from. Dashed arrows point from a module or program unit to 
+modules which it uses.
+</p>
+ </div>
+            </div>
+          </div>
+        </div>
+          </li>
+      </ul>
+    </div>
+
+
+
+
+    <h3>Arguments</h3>
+        <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th>Type</th>
+<th>Intent</th><th>Optional</th>        <th>Attributes</th>
+        <th></th>
+        <th>Name</th>
+        <th></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-np_str"></span>
+              character(len=1),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>np_str</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-is_coulomb"></span>
+              logical,
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>is_coulomb</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+    <br>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+  <h3 class="panel-title">Calls</h3>
+      </div>
+      <div class="panel-body">
+  <div class="depgraph"><?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.43.0 (0)
+ -->
+<!-- Title: proc~~calc_pot_u_np~~CallsGraph Pages: 1 -->
+<svg id="proccalc_pot_u_npCallsGraph" width="641pt" height="312pt"
+ viewBox="0.00 0.00 641.00 311.77" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="proc~~calc_pot_u_np~~CallsGraph" class="graph" transform="scale(1.72 1.72) rotate(0) translate(4 532)">
+<title>proc~~calc_pot_u_np~~CallsGraph</title>
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-532 1098,-532 1098,4 -4,4"/>
+<!-- proc~calc_pot_u_np -->
+<g id="proc~~calc_pot_u_np~~CallsGraph_node1" class="node">
+<title>proc~calc_pot_u_np</title>
+<polygon fill="none" stroke="black" points="237,-276 0,-276 0,-252 237,-252 237,-276"/>
+<text text-anchor="middle" x="118.5" y="-261.6" font-family="Helvetica,sans-Serif" font-size="10.50">determine_meanfield_potential::calc_pot_U_np</text>
+</g>
+<!-- b0pt -->
+<g id="proc~~calc_pot_u_np~~CallsGraph_node2" class="node">
+<title>b0pt</title>
+<polygon fill="#777777" stroke="#777777" points="426,-528 372,-528 372,-504 426,-504 426,-528"/>
+<text text-anchor="middle" x="399" y="-513.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">b0pt</text>
+</g>
+<!-- proc~calc_pot_u_np&#45;&gt;b0pt -->
+<g id="proc~~calc_pot_u_np~~CallsGraph_edge1" class="edge">
+<title>proc~calc_pot_u_np&#45;&gt;b0pt</title>
+<path fill="none" stroke="#000000" d="M123.56,-276.09C137.37,-315.18 186.55,-438.93 273,-495 299.4,-512.12 335.32,-516.67 361.88,-517.35"/>
+<polygon fill="#000000" stroke="#000000" points="361.88,-520.85 371.91,-517.43 361.94,-513.85 361.88,-520.85"/>
+</g>
+<!-- b0t -->
+<g id="proc~~calc_pot_u_np~~CallsGraph_node3" class="node">
+<title>b0t</title>
+<polygon fill="#777777" stroke="#777777" points="426,-486 372,-486 372,-462 426,-462 426,-486"/>
+<text text-anchor="middle" x="399" y="-471.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">b0t</text>
+</g>
+<!-- proc~calc_pot_u_np&#45;&gt;b0t -->
+<g id="proc~~calc_pot_u_np~~CallsGraph_edge2" class="edge">
+<title>proc~calc_pot_u_np&#45;&gt;b0t</title>
+<path fill="none" stroke="#000000" d="M125.4,-276.28C142.66,-310.7 196.67,-408.52 273,-453 299.9,-468.68 335.26,-473.44 361.5,-474.56"/>
+<polygon fill="#000000" stroke="#000000" points="361.69,-478.07 371.78,-474.84 361.88,-471.07 361.69,-478.07"/>
+</g>
+<!-- b1pt -->
+<g id="proc~~calc_pot_u_np~~CallsGraph_node4" class="node">
+<title>b1pt</title>
+<polygon fill="#777777" stroke="#777777" points="426,-444 372,-444 372,-420 426,-420 426,-444"/>
+<text text-anchor="middle" x="399" y="-429.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">b1pt</text>
+</g>
+<!-- proc~calc_pot_u_np&#45;&gt;b1pt -->
+<g id="proc~~calc_pot_u_np~~CallsGraph_edge3" class="edge">
+<title>proc~calc_pot_u_np&#45;&gt;b1pt</title>
+<path fill="none" stroke="#000000" d="M128.22,-276.4C149.32,-305.37 206.38,-377.57 273,-411 300.66,-424.88 335.65,-429.85 361.57,-431.51"/>
+<polygon fill="#000000" stroke="#000000" points="361.56,-435.01 371.73,-432.02 361.91,-428.02 361.56,-435.01"/>
+</g>
+<!-- b1t -->
+<g id="proc~~calc_pot_u_np~~CallsGraph_node5" class="node">
+<title>b1t</title>
+<polygon fill="#777777" stroke="#777777" points="426,-402 372,-402 372,-378 426,-378 426,-402"/>
+<text text-anchor="middle" x="399" y="-387.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">b1t</text>
+</g>
+<!-- proc~calc_pot_u_np&#45;&gt;b1t -->
+<g id="proc~~calc_pot_u_np~~CallsGraph_edge4" class="edge">
+<title>proc~calc_pot_u_np&#45;&gt;b1t</title>
+<path fill="none" stroke="#000000" d="M132.7,-276.06C157.91,-298.35 215.5,-345.82 273,-369 301.52,-380.5 336.15,-385.7 361.72,-388.05"/>
+<polygon fill="#000000" stroke="#000000" points="361.49,-391.55 371.74,-388.87 362.06,-384.57 361.49,-391.55"/>
+</g>
+<!-- b2pt -->
+<g id="proc~~calc_pot_u_np~~CallsGraph_node6" class="node">
+<title>b2pt</title>
+<polygon fill="#777777" stroke="#777777" points="426,-360 372,-360 372,-336 426,-336 426,-360"/>
+<text text-anchor="middle" x="399" y="-345.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">b2pt</text>
+</g>
+<!-- proc~calc_pot_u_np&#45;&gt;b2pt -->
+<g id="proc~~calc_pot_u_np~~CallsGraph_edge5" class="edge">
+<title>proc~calc_pot_u_np&#45;&gt;b2pt</title>
+<path fill="none" stroke="#000000" d="M143.89,-276C173.67,-290.19 225.91,-313.56 273,-327 302.25,-335.35 336.37,-340.8 361.56,-344.06"/>
+<polygon fill="#000000" stroke="#000000" points="361.42,-347.57 371.77,-345.32 362.27,-340.62 361.42,-347.57"/>
+</g>
+<!-- b2t -->
+<g id="proc~~calc_pot_u_np~~CallsGraph_node7" class="node">
+<title>b2t</title>
+<polygon fill="#777777" stroke="#777777" points="426,-318 372,-318 372,-294 426,-294 426,-318"/>
+<text text-anchor="middle" x="399" y="-303.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">b2t</text>
+</g>
+<!-- proc~calc_pot_u_np&#45;&gt;b2t -->
+<g id="proc~~calc_pot_u_np~~CallsGraph_edge6" class="edge">
+<title>proc~calc_pot_u_np&#45;&gt;b2t</title>
+<path fill="none" stroke="#000000" d="M199.31,-276.04C252.83,-284.11 320.79,-294.36 361.75,-300.53"/>
+<polygon fill="#000000" stroke="#000000" points="361.4,-304.02 371.81,-302.05 362.45,-297.1 361.4,-304.02"/>
+</g>
+<!-- b3pt -->
+<g id="proc~~calc_pot_u_np~~CallsGraph_node8" class="node">
+<title>b3pt</title>
+<polygon fill="#777777" stroke="#777777" points="426,-276 372,-276 372,-252 426,-252 426,-276"/>
+<text text-anchor="middle" x="399" y="-261.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">b3pt</text>
+</g>
+<!-- proc~calc_pot_u_np&#45;&gt;b3pt -->
+<g id="proc~~calc_pot_u_np~~CallsGraph_edge7" class="edge">
+<title>proc~calc_pot_u_np&#45;&gt;b3pt</title>
+<path fill="none" stroke="#000000" d="M237.21,-264C282.02,-264 329.89,-264 361.63,-264"/>
+<polygon fill="#000000" stroke="#000000" points="361.74,-267.5 371.74,-264 361.74,-260.5 361.74,-267.5"/>
+</g>
+<!-- b3pt2 -->
+<g id="proc~~calc_pot_u_np~~CallsGraph_node9" class="node">
+<title>b3pt2</title>
+<polygon fill="#777777" stroke="#777777" points="426,-234 372,-234 372,-210 426,-210 426,-234"/>
+<text text-anchor="middle" x="399" y="-219.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">b3pt2</text>
+</g>
+<!-- proc~calc_pot_u_np&#45;&gt;b3pt2 -->
+<g id="proc~~calc_pot_u_np~~CallsGraph_edge8" class="edge">
+<title>proc~calc_pot_u_np&#45;&gt;b3pt2</title>
+<path fill="none" stroke="#000000" d="M199.31,-251.96C252.83,-243.89 320.79,-233.64 361.75,-227.47"/>
+<polygon fill="#000000" stroke="#000000" points="362.45,-230.9 371.81,-225.95 361.4,-223.98 362.45,-230.9"/>
+</g>
+<!-- b3t -->
+<g id="proc~~calc_pot_u_np~~CallsGraph_node10" class="node">
+<title>b3t</title>
+<polygon fill="#777777" stroke="#777777" points="426,-192 372,-192 372,-168 426,-168 426,-192"/>
+<text text-anchor="middle" x="399" y="-177.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">b3t</text>
+</g>
+<!-- proc~calc_pot_u_np&#45;&gt;b3t -->
+<g id="proc~~calc_pot_u_np~~CallsGraph_edge9" class="edge">
+<title>proc~calc_pot_u_np&#45;&gt;b3t</title>
+<path fill="none" stroke="#000000" d="M143.89,-252C173.67,-237.81 225.91,-214.44 273,-201 302.25,-192.65 336.37,-187.2 361.56,-183.94"/>
+<polygon fill="#000000" stroke="#000000" points="362.27,-187.38 371.77,-182.68 361.42,-180.43 362.27,-187.38"/>
+</g>
+<!-- b4pt -->
+<g id="proc~~calc_pot_u_np~~CallsGraph_node11" class="node">
+<title>b4pt</title>
+<polygon fill="#777777" stroke="#777777" points="426,-150 372,-150 372,-126 426,-126 426,-150"/>
+<text text-anchor="middle" x="399" y="-135.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">b4pt</text>
+</g>
+<!-- proc~calc_pot_u_np&#45;&gt;b4pt -->
+<g id="proc~~calc_pot_u_np~~CallsGraph_edge10" class="edge">
+<title>proc~calc_pot_u_np&#45;&gt;b4pt</title>
+<path fill="none" stroke="#000000" d="M132.7,-251.94C157.91,-229.65 215.5,-182.18 273,-159 301.52,-147.5 336.15,-142.3 361.72,-139.95"/>
+<polygon fill="#000000" stroke="#000000" points="362.06,-143.43 371.74,-139.13 361.49,-136.45 362.06,-143.43"/>
+</g>
+<!-- b4t -->
+<g id="proc~~calc_pot_u_np~~CallsGraph_node12" class="node">
+<title>b4t</title>
+<polygon fill="#777777" stroke="#777777" points="426,-108 372,-108 372,-84 426,-84 426,-108"/>
+<text text-anchor="middle" x="399" y="-93.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">b4t</text>
+</g>
+<!-- proc~calc_pot_u_np&#45;&gt;b4t -->
+<g id="proc~~calc_pot_u_np~~CallsGraph_edge11" class="edge">
+<title>proc~calc_pot_u_np&#45;&gt;b4t</title>
+<path fill="none" stroke="#000000" d="M128.22,-251.6C149.32,-222.63 206.38,-150.43 273,-117 300.66,-103.12 335.65,-98.15 361.57,-96.49"/>
+<polygon fill="#000000" stroke="#000000" points="361.91,-99.98 371.73,-95.98 361.56,-92.99 361.91,-99.98"/>
+</g>
+<!-- proc~calc_coulomb_pot -->
+<g id="proc~~calc_pot_u_np~~CallsGraph_node13" class="node">
+<title>proc~calc_coulomb_pot</title>
+<g id="a_proc~~calc_pot_u_np~~CallsGraph_node13"><a xlink:href=".././proc/calc_coulomb_pot.html" xlink:title="determine_meanfield_potential::calc_coulomb_pot">
+<polygon fill="#d9534f" stroke="#d9534f" points="525,-66 273,-66 273,-42 525,-42 525,-66"/>
+<text text-anchor="middle" x="399" y="-51.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">determine_meanfield_potential::calc_coulomb_pot</text>
+</a>
+</g>
+</g>
+<!-- proc~calc_pot_u_np&#45;&gt;proc~calc_coulomb_pot -->
+<g id="proc~~calc_pot_u_np~~CallsGraph_edge12" class="edge">
+<title>proc~calc_pot_u_np&#45;&gt;proc~calc_coulomb_pot</title>
+<path fill="none" stroke="#000000" d="M125.4,-251.72C142.66,-217.3 196.67,-119.48 273,-75 276.09,-73.2 279.29,-71.55 282.57,-70.02"/>
+<polygon fill="#000000" stroke="#000000" points="284.15,-73.16 292.03,-66.07 281.45,-66.7 284.15,-73.16"/>
+</g>
+<!-- proc~write_u_term -->
+<g id="proc~~calc_pot_u_np~~CallsGraph_node14" class="node">
+<title>proc~write_u_term</title>
+<g id="a_proc~~calc_pot_u_np~~CallsGraph_node14"><a xlink:href=".././proc/write_u_term.html" xlink:title="write_to_file::write_U_term">
+<polygon fill="#d9534f" stroke="#d9534f" points="468.5,-24 329.5,-24 329.5,0 468.5,0 468.5,-24"/>
+<text text-anchor="middle" x="399" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">write_to_file::write_U_term</text>
+</a>
+</g>
+</g>
+<!-- proc~calc_pot_u_np&#45;&gt;proc~write_u_term -->
+<g id="proc~~calc_pot_u_np~~CallsGraph_edge13" class="edge">
+<title>proc~calc_pot_u_np&#45;&gt;proc~write_u_term</title>
+<path fill="none" stroke="#000000" d="M123.56,-251.91C137.37,-212.82 186.55,-89.07 273,-33 286.76,-24.08 303.1,-18.57 319.36,-15.24"/>
+<polygon fill="#000000" stroke="#000000" points="320.22,-18.65 329.45,-13.44 318.99,-11.75 320.22,-18.65"/>
+</g>
+<!-- proc~nine_point_poisson_by_lapack -->
+<g id="proc~~calc_pot_u_np~~CallsGraph_node15" class="node">
+<title>proc~nine_point_poisson_by_lapack</title>
+<g id="a_proc~~calc_pot_u_np~~CallsGraph_node15"><a xlink:href=".././proc/nine_point_poisson_by_lapack.html" xlink:title="poisson_problem::nine_point_poisson_by_lapack">
+<polygon fill="#d9534f" stroke="#d9534f" points="808,-66 561,-66 561,-42 808,-42 808,-66"/>
+<text text-anchor="middle" x="684.5" y="-51.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">poisson_problem::nine_point_poisson_by_lapack</text>
+</a>
+</g>
+</g>
+<!-- proc~calc_coulomb_pot&#45;&gt;proc~nine_point_poisson_by_lapack -->
+<g id="proc~~calc_pot_u_np~~CallsGraph_edge14" class="edge">
+<title>proc~calc_coulomb_pot&#45;&gt;proc~nine_point_poisson_by_lapack</title>
+<path fill="none" stroke="#000000" d="M525.17,-54C533.7,-54 542.31,-54 550.88,-54"/>
+<polygon fill="#000000" stroke="#000000" points="550.9,-57.5 560.9,-54 550.9,-50.5 550.9,-57.5"/>
+</g>
+<!-- proc~get_k -->
+<g id="proc~~calc_pot_u_np~~CallsGraph_node16" class="node">
+<title>proc~get_k</title>
+<g id="a_proc~~calc_pot_u_np~~CallsGraph_node16"><a xlink:href=".././proc/get_k.html" xlink:title="poisson_problem::get_k">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="987.5,-87 860.5,-87 860.5,-63 987.5,-63 987.5,-87"/>
+<text text-anchor="middle" x="924" y="-72.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">poisson_problem::get_k</text>
+</a>
+</g>
+</g>
+<!-- proc~nine_point_poisson_by_lapack&#45;&gt;proc~get_k -->
+<g id="proc~~calc_pot_u_np~~CallsGraph_edge15" class="edge">
+<title>proc~nine_point_poisson_by_lapack&#45;&gt;proc~get_k</title>
+<path fill="none" stroke="#000000" d="M808.08,-64.84C822.54,-66.12 836.92,-67.39 850.37,-68.58"/>
+<polygon fill="#000000" stroke="#000000" points="850.19,-72.08 860.46,-69.47 850.81,-65.1 850.19,-72.08"/>
+</g>
+<!-- proc~use_dgesv -->
+<g id="proc~~calc_pot_u_np~~CallsGraph_node17" class="node">
+<title>proc~use_dgesv</title>
+<g id="a_proc~~calc_pot_u_np~~CallsGraph_node17"><a xlink:href=".././proc/use_dgesv.html" xlink:title="poisson_problem::use_DGESV">
+<polygon fill="#d9534f" stroke="#d9534f" points="1004,-45 844,-45 844,-21 1004,-21 1004,-45"/>
+<text text-anchor="middle" x="924" y="-30.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">poisson_problem::use_DGESV</text>
+</a>
+</g>
+</g>
+<!-- proc~nine_point_poisson_by_lapack&#45;&gt;proc~use_dgesv -->
+<g id="proc~~calc_pot_u_np~~CallsGraph_edge16" class="edge">
+<title>proc~nine_point_poisson_by_lapack&#45;&gt;proc~use_dgesv</title>
+<path fill="none" stroke="#000000" d="M808.08,-43.16C816.7,-42.4 825.31,-41.64 833.7,-40.9"/>
+<polygon fill="#000000" stroke="#000000" points="834.16,-44.37 843.82,-40 833.55,-37.4 834.16,-44.37"/>
+</g>
+<!-- dgesv -->
+<g id="proc~~calc_pot_u_np~~CallsGraph_node18" class="node">
+<title>dgesv</title>
+<polygon fill="#777777" stroke="#777777" points="1094,-45 1040,-45 1040,-21 1094,-21 1094,-45"/>
+<text text-anchor="middle" x="1067" y="-30.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">dgesv</text>
+</g>
+<!-- proc~use_dgesv&#45;&gt;dgesv -->
+<g id="proc~~calc_pot_u_np~~CallsGraph_edge17" class="edge">
+<title>proc~use_dgesv&#45;&gt;dgesv</title>
+<path fill="none" stroke="#000000" d="M1004.16,-33C1013.15,-33 1021.95,-33 1029.96,-33"/>
+<polygon fill="#000000" stroke="#000000" points="1029.99,-36.5 1039.99,-33 1029.99,-29.5 1029.99,-36.5"/>
+</g>
+</g>
+</svg>
+</div>                <script>
+                  var panproccalc_pot_u_npCallsGraph = svgPanZoom('#proccalc_pot_u_npCallsGraph',
+                    {zoomEnabled: true, controlIconsEnabled: true, fit: true, center: true,}
+                  );
+                </script>        <div><a type="button" class="graph-help" data-toggle="modal" href="#graph-help-text">Help</a></div>
+          <div class="modal fade" id="graph-help-text" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                  <h4 class="modal-title" id="-graph-help-label">Graph Key</h4>
+                </div>
+              <div class="modal-body">
+<p>Nodes of different colours represent the following: </p>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.43.0 (0)
+ -->
+<!-- Title: Graph Key Pages: 1 -->
+<svg width="560pt" height="32pt"
+ viewBox="0.00 0.00 559.50 32.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 28)">
+<title>Graph Key</title>
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-28 555.5,-28 555.5,4 -4,4"/>
+<!-- Subroutine -->
+<g id="node1" class="node">
+<title>Subroutine</title>
+<polygon fill="#d9534f" stroke="#d9534f" points="64,-24 0,-24 0,0 64,0 64,-24"/>
+<text text-anchor="middle" x="32" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Subroutine</text>
+</g>
+<!-- Function -->
+<g id="node2" class="node">
+<title>Function</title>
+<polygon fill="#d94e8f" stroke="#d94e8f" points="136,-24 82,-24 82,0 136,0 136,-24"/>
+<text text-anchor="middle" x="109" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Function</text>
+</g>
+<!-- Interface -->
+<g id="node3" class="node">
+<title>Interface</title>
+<polygon fill="#a7506f" stroke="#a7506f" points="209.5,-24 154.5,-24 154.5,0 209.5,0 209.5,-24"/>
+<text text-anchor="middle" x="182" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Interface</text>
+</g>
+<!-- Unknown Procedure Type -->
+<g id="node4" class="node">
+<title>Unknown Procedure Type</title>
+<polygon fill="#777777" stroke="#777777" points="364,-24 228,-24 228,0 364,0 364,-24"/>
+<text text-anchor="middle" x="296" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Unknown Procedure Type</text>
+</g>
+<!-- Program -->
+<g id="node5" class="node">
+<title>Program</title>
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="436,-24 382,-24 382,0 436,0 436,-24"/>
+<text text-anchor="middle" x="409" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Program</text>
+</g>
+<!-- This Page&#39;s Entity -->
+<g id="node6" class="node">
+<title>This Page&#39;s Entity</title>
+<polygon fill="none" stroke="black" points="551.5,-24 454.5,-24 454.5,0 551.5,0 551.5,-24"/>
+<text text-anchor="middle" x="503" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50">This Page&#39;s Entity</text>
+</g>
+</g>
+</svg>
+
+<p>Solid arrows point from a procedure to one which it calls. Dashed 
+arrows point from an interface to procedures which implement that interface.
+This could include the module procedures in a generic interface or the
+implementation in a submodule of an interface in a parent module.
+</p>
+ </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+  <h3 class="panel-title">Called by</h3>
+      </div>
+      <div class="panel-body">
+  <div class="depgraph"><?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.43.0 (0)
+ -->
+<!-- Title: proc~~calc_pot_u_np~~CalledByGraph Pages: 1 -->
+<svg id="proccalc_pot_u_npCalledByGraph" width="641pt" height="23pt"
+ viewBox="0.00 0.00 641.00 22.67" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="proc~~calc_pot_u_np~~CalledByGraph" class="graph" transform="scale(1.41 1.41) rotate(0) translate(4 28)">
+<title>proc~~calc_pot_u_np~~CalledByGraph</title>
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-28 901,-28 901,4 -4,4"/>
+<!-- proc~calc_pot_u_np -->
+<g id="proc~~calc_pot_u_np~~CalledByGraph_node1" class="node">
+<title>proc~calc_pot_u_np</title>
+<polygon fill="none" stroke="black" points="897,-24 660,-24 660,0 897,0 897,-24"/>
+<text text-anchor="middle" x="778.5" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50">determine_meanfield_potential::calc_pot_U_np</text>
+</g>
+<!-- proc~calc_pot_u -->
+<g id="proc~~calc_pot_u_np~~CalledByGraph_node2" class="node">
+<title>proc~calc_pot_u</title>
+<g id="a_proc~~calc_pot_u_np~~CalledByGraph_node2"><a xlink:href=".././proc/calc_pot_u.html" xlink:title="determine_meanfield_potential::calc_pot_U">
+<polygon fill="#d9534f" stroke="#d9534f" points="624,-24 405,-24 405,0 624,0 624,-24"/>
+<text text-anchor="middle" x="514.5" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">determine_meanfield_potential::calc_pot_U</text>
+</a>
+</g>
+</g>
+<!-- proc~calc_pot_u&#45;&gt;proc~calc_pot_u_np -->
+<g id="proc~~calc_pot_u_np~~CalledByGraph_edge1" class="edge">
+<title>proc~calc_pot_u&#45;&gt;proc~calc_pot_u_np</title>
+<path fill="none" stroke="#000000" d="M624.34,-12C632.63,-12 641.05,-12 649.45,-12"/>
+<polygon fill="#000000" stroke="#000000" points="649.68,-15.5 659.68,-12 649.68,-8.5 649.68,-15.5"/>
+</g>
+<!-- proc~calc_meanfield -->
+<g id="proc~~calc_pot_u_np~~CalledByGraph_node3" class="node">
+<title>proc~calc_meanfield</title>
+<g id="a_proc~~calc_pot_u_np~~CalledByGraph_node3"><a xlink:href=".././proc/calc_meanfield.html" xlink:title="main::calc_meanfield">
+<polygon fill="#d9534f" stroke="#d9534f" points="369,-24 256,-24 256,0 369,0 369,-24"/>
+<text text-anchor="middle" x="312.5" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">main::calc_meanfield</text>
+</a>
+</g>
+</g>
+<!-- proc~calc_meanfield&#45;&gt;proc~calc_pot_u -->
+<g id="proc~~calc_pot_u_np~~CalledByGraph_edge2" class="edge">
+<title>proc~calc_meanfield&#45;&gt;proc~calc_pot_u</title>
+<path fill="none" stroke="#000000" d="M369.21,-12C377.36,-12 385.99,-12 394.83,-12"/>
+<polygon fill="#000000" stroke="#000000" points="394.88,-15.5 404.88,-12 394.88,-8.5 394.88,-15.5"/>
+</g>
+<!-- proc~calc_ground_state -->
+<g id="proc~~calc_pot_u_np~~CalledByGraph_node4" class="node">
+<title>proc~calc_ground_state</title>
+<g id="a_proc~~calc_pot_u_np~~CalledByGraph_node4"><a xlink:href=".././proc/calc_ground_state.html" xlink:title="main::calc_ground_state">
+<polygon fill="#d9534f" stroke="#d9534f" points="220,-24 90,-24 90,0 220,0 220,-24"/>
+<text text-anchor="middle" x="155" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">main::calc_ground_state</text>
+</a>
+</g>
+</g>
+<!-- proc~calc_ground_state&#45;&gt;proc~calc_meanfield -->
+<g id="proc~~calc_pot_u_np~~CalledByGraph_edge3" class="edge">
+<title>proc~calc_ground_state&#45;&gt;proc~calc_meanfield</title>
+<path fill="none" stroke="#000000" d="M220.15,-12C228.59,-12 237.26,-12 245.73,-12"/>
+<polygon fill="#000000" stroke="#000000" points="245.94,-15.5 255.94,-12 245.94,-8.5 245.94,-15.5"/>
+</g>
+<!-- program~main -->
+<g id="proc~~calc_pot_u_np~~CalledByGraph_node5" class="node">
+<title>program~main</title>
+<g id="a_proc~~calc_pot_u_np~~CalledByGraph_node5"><a xlink:href=".././program/main.html" xlink:title="main">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="54,-24 0,-24 0,0 54,0 54,-24"/>
+<text text-anchor="middle" x="27" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">main</text>
+</a>
+</g>
+</g>
+<!-- program~main&#45;&gt;proc~calc_ground_state -->
+<g id="proc~~calc_pot_u_np~~CalledByGraph_edge4" class="edge">
+<title>program~main&#45;&gt;proc~calc_ground_state</title>
+<path fill="none" stroke="#000000" d="M54.11,-12C61.84,-12 70.71,-12 79.91,-12"/>
+<polygon fill="#000000" stroke="#000000" points="79.98,-15.5 89.98,-12 79.98,-8.5 79.98,-15.5"/>
+</g>
+</g>
+</svg>
+</div>                <script>
+                  var panproccalc_pot_u_npCalledByGraph = svgPanZoom('#proccalc_pot_u_npCalledByGraph',
+                    {zoomEnabled: true, controlIconsEnabled: true, fit: true, center: true,}
+                  );
+                </script>        <div><a type="button" class="graph-help" data-toggle="modal" href="#graph-help-text">Help</a></div>
+          <div class="modal fade" id="graph-help-text" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                  <h4 class="modal-title" id="-graph-help-label">Graph Key</h4>
+                </div>
+              <div class="modal-body">
+<p>Nodes of different colours represent the following: </p>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.43.0 (0)
+ -->
+<!-- Title: Graph Key Pages: 1 -->
+<svg width="560pt" height="32pt"
+ viewBox="0.00 0.00 559.50 32.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 28)">
+<title>Graph Key</title>
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-28 555.5,-28 555.5,4 -4,4"/>
+<!-- Subroutine -->
+<g id="node1" class="node">
+<title>Subroutine</title>
+<polygon fill="#d9534f" stroke="#d9534f" points="64,-24 0,-24 0,0 64,0 64,-24"/>
+<text text-anchor="middle" x="32" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Subroutine</text>
+</g>
+<!-- Function -->
+<g id="node2" class="node">
+<title>Function</title>
+<polygon fill="#d94e8f" stroke="#d94e8f" points="136,-24 82,-24 82,0 136,0 136,-24"/>
+<text text-anchor="middle" x="109" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Function</text>
+</g>
+<!-- Interface -->
+<g id="node3" class="node">
+<title>Interface</title>
+<polygon fill="#a7506f" stroke="#a7506f" points="209.5,-24 154.5,-24 154.5,0 209.5,0 209.5,-24"/>
+<text text-anchor="middle" x="182" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Interface</text>
+</g>
+<!-- Unknown Procedure Type -->
+<g id="node4" class="node">
+<title>Unknown Procedure Type</title>
+<polygon fill="#777777" stroke="#777777" points="364,-24 228,-24 228,0 364,0 364,-24"/>
+<text text-anchor="middle" x="296" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Unknown Procedure Type</text>
+</g>
+<!-- Program -->
+<g id="node5" class="node">
+<title>Program</title>
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="436,-24 382,-24 382,0 436,0 436,-24"/>
+<text text-anchor="middle" x="409" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Program</text>
+</g>
+<!-- This Page&#39;s Entity -->
+<g id="node6" class="node">
+<title>This Page&#39;s Entity</title>
+<polygon fill="none" stroke="black" points="551.5,-24 454.5,-24 454.5,0 551.5,0 551.5,-24"/>
+<text text-anchor="middle" x="503" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50">This Page&#39;s Entity</text>
+</g>
+</g>
+</svg>
+
+<p>Solid arrows point from a procedure to one which it calls. Dashed 
+arrows point from an interface to procedures which implement that interface.
+This could include the module procedures in a generic interface or the
+implementation in a submodule of an interface in a parent module.
+</p>
+ </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+
+    <section class="visible-xs visible-sm hidden-md">
+        <h3>Contents</h3>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+    </section>
+    <br class="visible-xs visible-sm hidden-md">
+
+
+    
+    
+
+    
+    
+
+
+    
+    
+    </div>
+  </div>
+
+      <hr>
+    </div> <!-- /container -->
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-6 col-md-6"><p>Axial Skyrme Hartree-Fock (SHF) Code using Fortran Free-Form. was developed by <br>&copy; 2024 
+</p>
+          </div>
+          <div class="col-xs-6 col-md-6">
+            <p class="text-right">
+              Documentation generated by
+              <a href="https://github.com/Fortran-FOSS-Programmers/ford">FORD</a>
+            </p>
+          </div>
+        </div>
+        <br>
+      </div> <!-- /container -->
+    </footer>
+
+    <!-- Bootstrap core JavaScript
+         ================================================== -->
+         <!-- Placed at the end of the document so the pages load faster -->
+    <!--
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        -->
+        <script src="../js/bootstrap.min.js"></script>
+        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+        <script src="../js/ie10-viewport-bug-workaround.js"></script>
+
+        <!-- MathJax JavaScript
+             ================================================== -->
+             <!-- Placed at the end of the document so the pages load faster -->
+        <script type="text/x-mathjax-config">
+          MathJax.Hub.Config({
+          TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } },
+          jax: ['input/TeX','input/MathML','output/HTML-CSS'],
+          extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']
+          });
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+          <script src="../tipuesearch/tipuesearch_content.js"></script>
+          <script src="../tipuesearch/tipuesearch_set.js"></script>
+          <script src="../tipuesearch/tipuesearch.js"></script>
+
+  </body>
+</html>
