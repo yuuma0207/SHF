@@ -14,7 +14,6 @@ is_use_dd = .true.,
 is_use_B = .true.
 is_use_W = .true.
 not_divJ = .true.,
-is_TimeR = .true.,
 is_coulomb = .false.,
 Nr = 50,
 Nz = 50,

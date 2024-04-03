@@ -21,6 +21,8 @@ program main
     print*, "endrecord"
     contains
 
+    !| 役割：一粒子エネルギーの分散を計算し、収束判定及び、クーロン力を更新するかどうかの判定を行う。
+    ! サブルーチン名以上の役割を背負わせちゃってるのは良くないですね。ごめんなさい。この時はまだリーダブルコードを読んでなかったです。
     subroutine is_converge_for_one_E(is_converged)
         use,intrinsic :: iso_fortran_env,only:int32,real64
         use constants_and_parameters,only:SD_eps, prev_eps, num_n,num_p, is_minus_var, is_coulomb &
@@ -89,6 +91,9 @@ program main
         end if
     end subroutine is_converge_for_one_E
     
+    !| 役割：基底状態を求めるためのメインサブルーチン
+    ! max_iter回以下の虚時間発展を行い、基底状態を求める。
+    ! ときどき、エネルギー、波動関数、密度、平均場、物理量をファイルに書き出す。
     subroutine calc_ground_state
         use,intrinsic :: iso_fortran_env,only:int32,real64
         use constants_and_parameters,only : max_iter, plot_iter, is_converged, is_minus_var
@@ -178,6 +183,7 @@ program main
         call write_pot(num_iter)                   ! 平均場の書き出し
     end subroutine calc_ground_state
 
+    !| 密度関連の計算を行うサブルーチン
     subroutine calc_densities
         implicit none
         call calc_density_and_lap               ! ρとΔρの計算 
@@ -186,6 +192,7 @@ program main
 
     end subroutine calc_densities
     
+    !| 物理量の計算を行うサブルーチン
     subroutine calc_observables
         use determine_observables
         implicit none
@@ -197,7 +204,7 @@ program main
         
     end subroutine calc_observables
     
-    
+    !| インプットファイルの読み込みをしています
     subroutine read_input_parameters
         use,intrinsic :: iso_fortran_env,only:int32
         use global_variables
@@ -208,7 +215,7 @@ program main
         namelist /nuclear_param/ num_n, num_p, prep_max_r, prep_max_z, prep_max_m, nuc_name
         namelist /calc_param/ max_iter, lagrange_multiplier, imaginary_time_step, cou_eps, SD_eps, prev_eps &
                              ,is_use_dd, is_output, not_divJ, is_use_B, is_use_W &
-                             ,is_TimeR, is_coulomb, is_use_second_imag, Nr, Nz, plot_iter
+                             ,is_coulomb, is_use_second_imag, Nr, Nz, plot_iter
         open(unit=fi,file="./../src/input_parameters.txt",status="old",iostat=is)
         read(fi,nuclear_param,iostat=is)
         if (is /= 0) stop "Error reading nuclear_param."
@@ -225,13 +232,14 @@ program main
         end if
         dr = r_max/dble(Nr)        ! [fm] The grid spacing in r-direction
         dz = z_max/dble(Nz)        ! [fm] The grid spacing in z-direction
-        ! is_memoを用意して，readしてターミナルから文字列を受け取るようにしてメモを付ける
 
     end subroutine read_input_parameters
 
+    !| インプットに基づいて、計算の初期条件を決めるサブルーチン。
+    ! 初期波動関数の用意はここでしている。
     subroutine initial_settings
         use,intrinsic :: iso_fortran_env,only:int32
-        use global_variables,only : r_vec, z_vec, dr, dz, Nr, Nz, z_max, is_TimeR
+        use global_variables,only : r_vec, z_vec, dr, dz, Nr, Nz, z_max
         implicit none
         integer(int32) :: i
 
@@ -242,84 +250,10 @@ program main
         do i=1,Nz
             z_vec(i) = dz*dble(i)
         end do
-        if(is_TimeR)then
-            call prep_time_reversal_wavefunction
-        else
-            call prep_initial_wavefunction
-        end if
+        call prep_initial_wavefunction
 
     end subroutine initial_settings
 
-    subroutine prep_time_reversal_wavefunction ! 規格化はできている（overlap(k,k)=1）
-        use,intrinsic :: iso_fortran_env,only:int32,real64
-        use global_variables,only: prep_wf_plus, prep_wf_minus, r_vec,z_vec, z_max &
-                                  ,prep_max_r, prep_max_z, prep_max_m &
-                                  ,prep_mag => prep_magnetic_q_num, prep_idx_array &
-                                  ,prep_E => prep_one_particle_E
-
-        use constants_and_parameters,only: betain => deformation_degree, z_center, prep_number,Nr,Nz, nuc_name &
-                                          ,prep_max_m, prep_max_r, prep_max_z
-        use harmonic_occ_wf,only : set_harmonic_occ, calc_occ_energy
-        use math_integrate,only: volume_integrate
-        implicit none
-        
-        integer(int32) :: i,j,k,np,tmp
-        integer(int32)   :: prep_r,prep_z,prep_m
-        integer(int32),allocatable :: rzm_ar(:,:)
-        integer(int32) :: prep
-        real(real64)   :: z0  ! 原子核の中心（0, z_max/2）
-        allocate(rzm_ar(prep_number,3))
-        z0 = z_center
-
-        ! 取りうる量子数の設定
-        prep=1
-        do k=-prep_max_m,prep_max_m
-        do i=0,prep_max_r
-        do j=0,prep_max_z
-            rzm_ar(prep,1) = i
-            rzm_ar(prep,2) = j
-            rzm_ar(prep,3) = k
-            prep_idx_array(prep,1) = prep
-            prep_idx_array(prep,2) = prep
-            prep = prep + 1
-        end do
-        end do
-        end do
-
-        ! Time-reversalを課して方位量子数を設定，配列も直す
-        do np=1,2
-            do prep=1,prep_number,2
-                prep_mag(prep,np) = rzm_ar(prep,3)
-                prep_mag(prep+1,np) = -prep_mag(prep,np) - 1 ! time-reversal
-                rzm_ar(prep+1,3) = -prep_mag(prep,np) - 1 ! time-reversal
-            end do
-        end do
-
-        do np=1,2
-        do prep=1,prep_number,2
-            do j=1,Nz
-            do i=1,Nr
-            prep_wf_plus(i,j,prep,np) &
-            = set_harmonic_occ(rzm_ar(prep,1),rzm_ar(prep,2),prep_mag(prep,np),r_vec(i),z_vec(j)-z0,betain)/sqrt(2d0)
-            prep_wf_minus(i,j,prep,np) &
-            = set_harmonic_occ(rzm_ar(prep,1),rzm_ar(prep,2),prep_mag(prep,np)+1,r_vec(i),z_vec(j)-z0,betain)/sqrt(2d0)
-
-            prep_wf_plus(i,j,prep+1,np)  = -prep_wf_minus(i,j,prep,np) ! time-reversal
-            prep_wf_minus(i,j,prep+1,np) =  prep_wf_plus(i,j,prep,np) ! time-reversal
-            end do
-            end do
-        end do
-        end do
-        do np=1,2
-            do prep=1,prep_number
-                prep_E(prep,np) = calc_occ_energy(rzm_ar(prep,1),rzm_ar(prep,2),prep_mag(prep,np),betain)
-            end do
-        end do  
-
-
-        ! エネルギーの小さい順にソート
-        call sort_energy_and_idx(prep_E(:,:),prep_idx_array(:,:))
-    end subroutine prep_time_reversal_wavefunction
     
 
     ! 波動関数の初期化，調和振動子に基づく1粒子エネルギーを設定
